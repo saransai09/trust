@@ -46,22 +46,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/auth/facebook', passport.authenticate('facebook',{
-  scope:['email','public_profile'] //to retrieve profile info from google users
-}));
-      
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook'),
-    (req,res)=>{
-      res.send('/dashboard')
-    });
-
-
-
 // Instruct Express to pass on any request made to the '/graphql' route
 // to the GraphQL instance.
 app.use('/graphql', expressGraphQL({
