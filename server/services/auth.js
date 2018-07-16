@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -37,34 +37,9 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
       }
       return done(null, false, 'Invalid credentials.');
     });
-  });
+   });
 }));
 
-const FacebookStrategy = require('passport-facebook').Strategy;
-const Keys = require('./keys');
-
-passport.use(new FacebookStrategy({
-    clientID: Keys.Facebook.clientID,
-    clientSecret: Keys.Facebook. clientSecret,
-    callbackURL: '/auth/facebook/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOne({facebookId:profile.id}).then((currentUser)=>{
-      if(currentUser){
-        console.log("User is:" + currentUser)
-      }else{
-        new User({
-          UserName: profile.displayName,
-          email: profile.email,
-          gender: profile.gender,
-          facebookId: profile.id
-        }).save().then((newUser)=>{
-          console.log("new User Created:" + newUser);
-        })
-      }
-    })
-   }
-));
 
 // Creates a new user account.  We first check to see if a user already exists
 // with this email address to avoid making multiple accounts with identical addresses
@@ -73,13 +48,13 @@ passport.use(new FacebookStrategy({
 // Notice the Promise created in the second 'then' statement.  This is done
 // because Passport only supports callbacks, while GraphQL only supports promises
 // for async code!  Awkward!
-function signup({ email, password, req }) {
-  const user = new User({ email, password });
+function signup({ email,UserName,mobile_num, password, req }) {
+  const user = new User({ email,UserName,mobile_num, password });
   if (!email || !password) { throw new Error('You must provide an email and password.'); }
 
-  return User.findOne({ email })
+  return User.findOne({ email, UserName})
     .then(existingUser => {
-      if (existingUser) { throw new Error('Email in use'); }
+      if (existingUser) { throw new Error('Email Or UserName in use'); }
       return user.save();
     })
     .then(user => {

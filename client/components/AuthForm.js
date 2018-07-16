@@ -37,9 +37,6 @@ class AuthForm extends Component {
           </div>
           <button className="btn">Submit</button>
         </form>
-          <div>
-            <a href="/auth/facebook">Login with Facebook</a>
-          </div>
       </div>
       
     );

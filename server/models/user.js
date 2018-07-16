@@ -6,11 +6,10 @@ const Schema = mongoose.Schema;
 // Every user has an email and password.  The password is not stored as
 // plain text - see the authentication helpers below.
 const UserSchema = new Schema({
-  email: String,
-  password: String,
-  gender: String,
   UserName: String,
-  facebookId: String
+  mobile_num: Number,
+  email: String,
+  password: String
 });
 
 // The user's password is never saved in plain text.  Prior to saving the

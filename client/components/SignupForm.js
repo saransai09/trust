@@ -3,13 +3,11 @@ import AuthForm from './AuthForm';
 import { graphql } from 'react-apollo';
 import mutation from '../mutations/Signup';
 import query from '../Query/CurrentUser';
-import { hashHistory } from 'react-router';
+import Profile from './profile/profile';
 
 class SignupForm extends Component {
-  constructor(props) {
-  
+  constructor(props) {  
   super(props);
-
     this.state = { errors: [] };
   }
   componentWillUpdate(nextProps) {
@@ -32,7 +30,7 @@ class SignupForm extends Component {
     return (
       <div>
         <h3>Sign Up</h3>
-        <AuthForm
+        <Profile 
           errors={this.state.errors}
           onSubmit={this.onSubmit.bind(this)}
         />

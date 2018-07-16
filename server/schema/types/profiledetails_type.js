@@ -6,7 +6,7 @@ const{
 }= graphql;
 
 
-const UserType = new GraphQLObjectType({
+const ProfileDetailType = new GraphQLObjectType({
     name: 'UserType',
     fields: {
         id: { type: GraphQLID},
@@ -14,4 +14,4 @@ const UserType = new GraphQLObjectType({
     }
 });
 
-module.exports = UserType;
+module.exports = ProfileDetailType;
